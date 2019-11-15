@@ -1,4 +1,4 @@
-<p align="center"># ItBI Exercise 6.<br><br>
+# ItBI Exercise 6.<br><br>
 ## First, installing prerequisite packages since the VM seemed to have some problems.<br><br>
 ### Linux needed packages.<br><br>
 `sudo apt-get -y install build-essential curl git cmake tabix`<br><br>
