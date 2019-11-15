@@ -1,4 +1,4 @@
-# ItBI Exercise 6.<br><br>
+<p align="center"># ItBI Exercise 6.<br><br>
 ## First, installing prerequisite packages since the VM seemed to have some problems.<br><br>
 ### Linux needed packages.<br><br>
 `sudo apt-get -y install build-essential curl git cmake tabix`<br><br>
@@ -48,7 +48,7 @@
 `tar -zxvf Intro2Bio6.tar.gz`<br><br>
 `rm -r Intro2Bio6.tar.gz`<br><br>
 ### Assignment 1. Each sample has 10k reads.<br><br>
-#### A for loop iterates over all the fastq files in directory, printing their name and then the lines are counted.<br><br>###
+#### A for loop iterates over all the fastq files in directory, printing their name and then the lines are counted.<br><br>
 #### Since the fastq format presents a read using 4 lines, the output is divided by 4 and passed to the bash calculator to get a proper arithmetic result.<br><br>
 `for i in *.fastq;`<br><br>
 `do`<br><br>
@@ -126,3 +126,4 @@
 `done`<br><br>
 ### Common: 723, Unique to A: 551 and unique to B:565.<br><br>
 `vcf-compare A.vcf.gz B.vcf.gz > vcf_compare_output.txt`
+  </p>
