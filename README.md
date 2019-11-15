@@ -48,20 +48,18 @@
 `tar -zxvf Intro2Bio6.tar.gz`<br><br>
 `rm -r Intro2Bio6.tar.gz`<br><br>
 ### Assignment 1. Each sample has 10k reads.<br><br>
-#### A for loop iterates over all the fastq files in directory, printing their name and then the lines are counted.<br><br>
-#### Since the fastq format presents a read using 4 lines, the output is divided by 4 and passed to the bash calculator to get a proper arithmetic result.<br><br>
+#### A for loop iterates over all the fastq files in directory, printing their name and then the lines are counted. Since the fastq format presents a read using 4 lines, the output is divided by 4 and passed to the bash calculator to get a proper arithmetic result.<br><br>
 `for i in *.fastq;`<br><br>
 `do`<br><br>
 `echo $i`<br><br>
 `echo $(cat *.fastq|wc -l)/4 | bc`<br><br>
 `done`<br><br>
 ### Assignment 2.<br><br>
-#### The -c flag is for counting reads and not reporting them and the -f 2 flag reports only reads that were mapped correctly, as shown in the documentation.<br><br>
+#### The -c flag is for counting reads and not reporting them and the -f 2 flag reports only reads that were mapped correctly, as shown in the documentation.The bwlow command works only for reads that were properly mapped in a pair though. The next one reports all reads that were not any of the following:<br><br>
 `samtools view -c -f 2 *.sam`<br><br>
-#### The above command works only for reads that were properly mapped in a pair though. The following one reports all reads that were not any of the following:.<br><br>
-#### Unmapped.<br><br>
-#### Secondary aligned.<br><br>
-#### Supplementar(ily) aligned.<br><br>
+#### 1. Unmapped.
+#### 2. Secondary aligned.
+#### 3. Supplementar(ily) aligned.
 #### It reports or the rest, because the -F flag is the exclusion flag. The result is 9818 reads.<br><br>
 `samtools view -F 0x904 -c *.sam`<br><br>
 #### If one wants to report only the mapped reads, they could use the following command: The result remains 9818.<br><br>
@@ -69,16 +67,15 @@
 ### Assignment 3.<br><br>
 #### First, let's create a variable containing the SAM file name.<br><br>
 `sam_file=$(ls | grep "sam$")`<br><br>
-#### Then convert to BAM. The S flag indicates input is in SAM format and the b flag indicates we want the BAM output. Shamelessly 
-#### stolen from http://seqanswers.com/forums/showthread.php?t=6050.<br><br>
+#### Then convert to BAM. The S flag indicates input is in SAM format and the b flag indicates we want the BAM output. Shamelessly stolen from http://seqanswers.com/forums/showthread.php?t=6050.<br><br>
 `samtools view -Sb  $sam_file  >  sample.bam`<br><br>
 ### Assignment 4.<br><br>
 #### https://www.biostars.org/p/260419/.<br><br>
 `samtools sort sample.bam > sorted.bam`<br><br>
 `stat *.bam`<br><br>
-#### There indeed is a size difference. Simple google searching reveals that compression is better in .bam when similar reads are #### grouped together (Sorted).<br><br>
-#### http://seqanswers.com/forums/showthread.php?t=13652.<br><br>
-#### https://www.biostars.org/p/150457/ An answer by Sean himself.<br><br>
+#### There indeed is a size difference. Simple google searching reveals that compression is better in .bam when similar reads are grouped together (Sorted).<br><br>
+#### 1. http://seqanswers.com/forums/showthread.php?t=13652.
+#### 2. https://www.biostars.org/p/150457/ An answer by Sean himself.
 #### Just to make sure, we also report the number of reads in each file. They remain at 10000.<br><br>
 `for i in *.bam;`<br><br>
 `do`<br><br>
@@ -87,11 +84,10 @@
 `done`<br><br>
 ### Assignment 5.<br><br>
 `samtools index sorted.bam`<br><br>
-#### Indexing is only possible for sorted BAMs. The index is a hash like structure that allows easy access to the BAM file. I assume that creating it would.<br><br>
-#### take much more time without beforehand sorting and is therefore disabled. While I did not find any topics specifically adressing this, here's some more biostars.<br><br>
-#### https://www.biostars.org/p/15847/.<br><br>
-#### https://www.biostars.org/p/319730/.<br><br>
-#### http://www.htslib.org/doc/samtools.html.<br><br>
+#### Indexing is only possible for sorted BAMs. The index is a hash like structure that allows easy access to the BAM file. I assume that creating it would take much more time without beforehand sorting and is therefore disabled. While I did not find any topics specifically adressing this, here's some more biostars.<br><br>
+#### 1. https://www.biostars.org/p/15847/.
+#### 2. https://www.biostars.org/p/319730/.
+#### 3. http://www.htslib.org/doc/samtools.html.
 ### Assignment 6.<br><br>
 #### https://www.biostars.org/p/5165/.<br><br>
 `genomeCoverageBed -ibam sorted.bam -g human_g1k_v37_chr20.fasta > coverage.txt`<br><br>
@@ -125,5 +121,4 @@
 `tabix -p vcf $i.gz`<br><br>
 `done`<br><br>
 ### Common: 723, Unique to A: 551 and unique to B:565.<br><br>
-`vcf-compare A.vcf.gz B.vcf.gz > vcf_compare_output.txt`
-  </p>
+`vcf-compare A.vcf.gz B.vcf.gz > vcf_compare_output.txt
